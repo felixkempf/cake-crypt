@@ -1,0 +1,23 @@
+{
+    "name": "felixkempf/cake-crypt",
+    "description": "En-/DecryptTypes for CakePHP 3",
+    "license": "MIT",
+    "type": "cakephp-plugin",
+    "extra": {
+        "installer-name": "Crypt"
+    },
+    "require": {
+        "php": ">=5.4.0",
+        "cakephp/plugin-installer": "*"
+    },
+    "require-dev": {
+        "cakephp/cakephp": "~3.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Crypt\\": "src"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
