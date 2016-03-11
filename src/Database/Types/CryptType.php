@@ -1,5 +1,15 @@
 <?php
-namespace App\Database\Types;
+/**
+ * Copyright (c) Felix Kempf 2016
+ *
+ * Licensed under The MIT License
+ * For full copyright and license information, please see the LICENSE.txt
+ * Redistributions of files must retain the above copyright notice.
+ *
+ * @copyright     Copyright (c) Felix Kempf 2016
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
+ */
+namespace Crypt\Database\Types;
 
 use Cake\Core\Configure;
 use Cake\Database\Driver;
@@ -10,7 +20,7 @@ use Cake\Utility\Security;
 /**
  * Usage:
  * In config/bootstrap.php, add
- *      Type::map('crypt', '\CkTools\Database\Type\CryptType');
+ *      Type::map('crypt', '\Crypt\Database\Type\CryptType');
  *
  * In your Table::initialize(), use
  *      $this->schema()->columnType('your_field', 'crypt');
