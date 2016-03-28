@@ -51,6 +51,21 @@ class CryptJsonType extends CryptType
 
     /**
      * Convert request data into an array
+     * If a key is set multiple times, uses the first value given, for example:
+     * $requestData['fieldname'] = [
+     *	    0 => [
+     *	    	'key' => 'foo',
+     *	    	'value' => 'bar'
+     *	    ],
+     *	    1 => [
+     *	    	'key' => 'foo',
+     *	    	'value' => 'baz'
+     *	    ]
+     * ]
+     * will end up in the entity like
+     * 'fieldname' => [
+     *		'foo' => 'bar'
+     *	]
      *
      * @param mixed $value Request Data
      * @return mixed
@@ -60,7 +75,7 @@ class CryptJsonType extends CryptType
         if (is_array($value)) {
             $array = [];
             foreach ($value as $key => $valueArray) {
-                if (!empty($valueArray['key']) && !empty($valueArray['value'])) {
+                if (!empty($valueArray['key']) && !empty($valueArray['value']) && !isset($array[ $valueArray['key'] ])) {
                     $array[ $valueArray['key'] ] = $valueArray['value'];
                 }
             }

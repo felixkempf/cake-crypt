@@ -21,22 +21,25 @@ class CryptComponent extends Component
     // The other component the component uses
     public $components = ['Auth'];
 
-    // Execute any other additional setup for the component.
-    public function initialize(array $config)
-    {
-    }
-
     /**
      * called after the controller’s beforeFilter method but before the controller
      * executes the current action handler.
+     *
      * Writes the hashed user password into the config and handles pagination url queries
+     *
+     * Also sets pagination limit for the finder to 1000 to make pagination impossible
+     * No really, strange behavior from PaginationHelper, feel free fo fixin
      */
     public function startup(Event $event)
     {
+        $this->Auth->config('authorize', ['controller']);
         if (!empty($this->Auth->user())) {
             Configure::write('Caches.key', $this->Auth->user('password'));
         }
-        $this->__translatePaginationQueries($event->subject()->paginate);
+        $this->__translatePaginationQueries();
+        $this->Crypt->setPaginationSettings([
+            'limit' => 1000
+        ]);
     }
 
     /**
@@ -76,8 +79,10 @@ class CryptComponent extends Component
 
     /**
      * translates url queries from pagination into pagination custom finder options
+     *
+     * @return void
      */
-    private function __translatePaginationQueries($paginate)
+    private function __translatePaginationQueries()
     {
         $customFinderOptions = [];
         if ($this->request->action === 'index') {

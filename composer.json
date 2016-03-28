@@ -1,6 +1,6 @@
 {
     "name": "felixkempf/cake-crypt",
-    "description": "En-/DecryptTypes for CakePHP 3",
+    "description": "Encrypting DB values for CakePHP 3",
     "license": "MIT",
     "type": "cakephp-plugin",
     "extra": {

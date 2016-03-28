@@ -27,12 +27,22 @@ class CryptBehavior extends Behavior
 
         if (!empty($options['where']) ) {
             foreach ($options['where'] as $fieldname => $fieldvalue) {
-                if ($all->first()->has($fieldname)) {
+                if (strpos(substr($fieldname, -6), 'IS') !== false) {
+                    $fieldname = str_replace(['IS', ' '], '', $fieldname);
+                }
+                if (strpos(substr($fieldname, -6), 'NOT') !== false) {
+                    $fieldname = str_replace(['NOT'], '!', $fieldname);
+                }
+                if (strpos(substr($fieldname, -1), '!') !== false) {
+                    $fieldname = substr($fieldname, 0, -1);
+                    $all = $all->reject(function($value, $key) use ($fieldname, $fieldvalue) {
+                        return $value->$fieldname == $fieldvalue;
+                    });
+                } else {
                     $all = $all->match([$fieldname => $fieldvalue]);
                 }
             }
         }
-
         $ids = $all->extract('id')->toArray();
         if (count($ids) === 0) {
             return [];
@@ -49,7 +59,6 @@ class CryptBehavior extends Behavior
         $returnQuery = $Model->find($type, $findOptions)
             ->contain($contain)
             ->select($select)
-            ->limit(1000) // just to overwrite any other limit
             ->where([
                 $Model->alias() . '.' . $Model->primaryKey() . ' IN' => $ids
             ]);
