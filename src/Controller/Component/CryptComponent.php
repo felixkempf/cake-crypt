@@ -19,7 +19,7 @@ use Cake\Utility\Hash;
 class CryptComponent extends Component
 {
     // The other component the component uses
-    public $components = ['Auth'];
+    public $components = ['App.Auth'];
 
     /**
      * called after the controller’s beforeFilter method but before the controller
@@ -37,7 +37,7 @@ class CryptComponent extends Component
             Configure::write('Caches.key', $this->Auth->user('password'));
         }
         $this->__translatePaginationQueries();
-        $this->Crypt->setPaginationSettings([
+        $this->setPaginationSettings([
             'limit' => 1000
         ]);
     }

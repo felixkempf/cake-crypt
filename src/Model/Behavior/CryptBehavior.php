@@ -13,6 +13,7 @@ namespace Crypt\Model\Behavior;
 
 use Cake\ORM\Behavior;
 use Cake\ORM\Query;
+use Cake\Utility\Inflector;
 
 class CryptBehavior extends Behavior
 {

@@ -8,17 +8,19 @@
   - matching
   - list
   - sort on not encrypted fields. Sorting encrypted fields may be done with `Collection::sort` or `Hash::sort`
+
 - Component to translate pagination queries into finder options and provides helper method `CryptComponent::setPaginationSettings`
 - BcryptPasswordHasher to guarantee a password hash long and secure enough to function as en-/decryption key. Default cost is 16
-- empty default config file (best feature IMO)
+- empty default config file (best feature IMHO)
 
 
 TODO:
 - high prio
-  - document the cryptFinder and its use
+  - either find a way around the plugin workaround or document how to do it
+  - document the CryptBehavior and its use
 
 - low prio
   - enable callbacks for matching
   - somehow wrap output of CryptJsonType fields to include sth. like
 
-`echo (!empty($this->cj_data) && is_array($this->cj_data)) ? json_encode($this->cj_data, JSON_UNESCAPED_UNICODE) : '';`
+`echo (!empty($entity->cj_data) && is_array($entity->cj_data)) ? json_encode($entity->cj_data, JSON_UNESCAPED_UNICODE) : '';`
