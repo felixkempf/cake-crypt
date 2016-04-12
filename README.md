@@ -1,6 +1,6 @@
 #felixkempf/cake-crypt
 
-- Database Types for encrpyting string or json data.
+- Database Types for encrypting string or json data.
 - Finder method via Behavior to emulate
   - conditions
   - select
@@ -15,7 +15,7 @@
 
 TODO:
 - high prio
-  - document finder and its use
+  - document the cryptFinder and its use
 
 - low prio
   - enable callbacks for matching
