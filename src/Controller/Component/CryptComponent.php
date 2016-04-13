@@ -93,7 +93,7 @@ class CryptComponent extends Component
                 $customFinderOptions['direction'] = $this->request->query('direction');
             }
             if (!empty($this->request->query('conditions'))) {
-                $customFinderOptions['conditions'] = $this->request->query('conditions');
+                $customFinderOptions['where'] = $this->request->query('conditions');
             }
         }
         $this->_registry->getController()->paginate += [

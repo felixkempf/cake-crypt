@@ -16,6 +16,11 @@
     "autoload": {
         "psr-4": {
             "Crypt\\": "src"
+        },
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Crypt\\": "src"
         }
     },
     "minimum-stability": "dev",
