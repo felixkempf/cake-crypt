@@ -106,4 +106,16 @@ class CryptBehavior extends Behavior
 
         return $returnQuery;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function get($primaryKey, $options = [])
+    {
+        $options += [
+            'finder' => 'encrypted'
+        ];
+
+        parent::get($primaryKey, $options);
+    }
 }
