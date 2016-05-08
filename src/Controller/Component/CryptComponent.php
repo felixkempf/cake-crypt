@@ -78,6 +78,52 @@ class CryptComponent extends Component
     }
 
     /**
+     * check if a configured amount of seconds past since the time stamp in the user
+     * session was last set / renewed
+     *
+     * @return bool
+     */
+    private function __checkSessionAge()
+    {
+        $session = $this->request->session()->read();
+        if (!empty($session['Auth']['User']['time'])
+            && (
+            ($session['Config']['time'] - $session['Auth']['User']['time'])
+            > Configure::read('Crypt.sessionCheckThreshold')
+            )
+        ) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * read yourself
+     *
+     * @return void
+     */
+    public function randomlyAskForPassword()
+    {
+        if (Configure::read('debug') === false // plese not while developing
+            && $this->request->is('get') // only get so no post is lost
+            && $this->__checkSessionAge() // waits configured time after successfull logins
+            && $this->response->statusCode() === 200 // excludes especially 403 Not Authorized
+            && strpos($this->request->here(), '/users/login') === false // avoid stacking of redirectUrl
+            && mt_rand(0, 9) === 0 // even then  statistically only every 10th case
+        ) {
+            $this->Flash->info('PASWWORT BITTE!'); // scare
+            // destroy authorization
+            $this->request->session()->delete('Auth.User.role');
+            $this->request->session()->delete('Auth.User.password');
+            // redirect to login, not logout, to keep rest of session data intact
+            $url = $this->Auth->_config['loginAction'];
+            // save the initial request url into redirect parameter
+            $url['redirectUrl'] = $this->request->here();
+            return $this->redirect($url);
+        }
+    }
+
+    /**
      * translates url queries from pagination into pagination custom finder options
      *
      * @return void

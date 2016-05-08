@@ -10,7 +10,7 @@
   - sort on not encrypted fields. Sorting encrypted fields may be done with `Collection::sort` or `Hash::sort`
 - Component to translate pagination queries into finder options and provides helper method `CryptComponent::setPaginationSettings`
 - BcryptPasswordHasher to guarantee a password hash long and secure enough to function as en-/decryption key. Default cost is 16
-- empty default config file (best feature IMO)
+- empty default config file (best feature IMHO)
 
 
 TODO:
