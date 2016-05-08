@@ -13,6 +13,7 @@ namespace Crypt\Model\Behavior;
 
 use Cake\ORM\Behavior;
 use Cake\ORM\Query;
+use Cake\Utility\Inflector;
 
 class CryptBehavior extends Behavior
 {
@@ -104,5 +105,17 @@ class CryptBehavior extends Behavior
         }
 
         return $returnQuery;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function get($primaryKey, $options = [])
+    {
+        $options += [
+            'finder' => 'encrypted'
+        ];
+
+        parent::get($primaryKey, $options);
     }
 }
