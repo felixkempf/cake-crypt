@@ -1,0 +1,25 @@
+*~
+*.bak
+build
+.buildpath
+compass
+_compass.scss
+desktop.ini
+.idea
+/logs
+nbproject/
+node_modules
+.project
+.sass-cache
+.settings
+Thumbs.db
+.tmpoj
+
+# CakePHP 3
+
+/vendor/*
+/tmp/*
+/logs/*
+!**/empty
+
+.DS_Store
