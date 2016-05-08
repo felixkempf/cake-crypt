@@ -11,7 +11,12 @@
 
 - Component to translate pagination queries into finder options and provides helper method `CryptComponent::setPaginationSettings`
 - BcryptPasswordHasher to guarantee a password hash long and secure enough to function as en-/decryption key. Default cost is 16
-- empty default config file (best feature IMHO)
+- not empty default config file with second best feature: auto-inclusion by bootstrapping when loading the Plugin
+`Plugin::load('Crypt', [
+    'bootstrap' => true,
+    'routes' => false,
+    'autoload' => true
+]);`
 
 
 TODO:
