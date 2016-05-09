@@ -1,5 +1,5 @@
 <?php
-$config = [
+return [
     'Crypt' => [
         'sessionCheckThreshold' => 500
     ]

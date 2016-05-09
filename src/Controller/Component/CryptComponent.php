@@ -104,7 +104,7 @@ class CryptComponent extends Component
      */
     public function randomlyAskForPassword()
     {
-        if (Configure::read('debug') === false // plese not while developing
+        if (Configure::read('debug') === false // please not while developing
             && $this->request->is('get') // only get so no post is lost
             && $this->__checkSessionAge() // waits configured time after successfull logins
             && $this->response->statusCode() === 200 // excludes especially 403 Not Authorized
